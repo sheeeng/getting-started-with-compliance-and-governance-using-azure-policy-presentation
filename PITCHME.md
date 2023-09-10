@@ -41,6 +41,8 @@ Some speaker notes here that might be useful.
 
 ---
 
+This page intentionally left blank.
+
 <!--
 Some speaker notes here that might be useful.
 
@@ -48,6 +50,8 @@ TODO: Recapitulate DevOps, SRE, Platform, Governance
 -->
 
 ---
+
+This page intentionally left blank.
 
 <!--
 Some speaker notes here that might be useful.
