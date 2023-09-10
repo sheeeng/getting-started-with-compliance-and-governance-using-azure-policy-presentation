@@ -105,7 +105,7 @@ Some speaker notes here that might be useful.
 
 ### Takk
 
-Leonard Sheng² Lee
+Leonard Sheng Sheng Lee
 [GitHub](https://github.com/sheeeng) (https://github.com/sheeeng)
 
 <!--
