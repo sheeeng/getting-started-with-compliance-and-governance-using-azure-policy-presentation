@@ -15,8 +15,6 @@ _paginate: true
 
 # <!--fit--> Getting Started with <br/> Governance & Compliance <br/>using Azure Policy
 
-https://sheeeng.github.io/getting-started-with-compliance-and-governance-using-azure-policy-presentation/
-
 <style scoped>a { color: #36d; }</style>
 
 <!--
@@ -111,6 +109,10 @@ Leonard Sheng Sheng Lee
 <!--
 Some speaker notes here that might be useful.
 -->
+
+---
+
+![bg 40%](./assets/qr/getting-started-with-compliance-and-governance-using-azure-policy-presentation.png)
 
 ---
 
