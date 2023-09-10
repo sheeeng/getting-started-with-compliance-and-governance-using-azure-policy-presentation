@@ -11,14 +11,6 @@ paginate: true
 _paginate: true
 ---
 
-<!-- https://github.com/yhatt/marp-cli-example/blob/master/PITCHME.md -->
-<!-- https://github.com/yhatt/marp-cli-example/blob/8d8896dfcb7dc1c2e33a7ee825fa640df2fccf5d/PITCHME.md -->
-<!--https://raw.githubusercontent.com/yhatt/marp-cli-example/master/PITCHME.md-->
-<!--https://raw.githubusercontent.com/yhatt/marp-cli-example/master/PITCHME.md-->
-<!--https://raw.githubusercontent.com/yhatt/marp-cli-example/8d8896dfcb7dc1c2e33a7ee825fa640df2fccf5d/PITCHME.md-->
-
-<!-- ![bg opacity](./assets/gradient.jpg) -->
-
 ![bg opacity:.2 blur:5px 50%](./assets/icons/Microsoft_Azure.svg)
 
 # <!--fit--> Getting Started with <br/> Governance & Compliance <br/>using Azure Policy
@@ -35,19 +27,31 @@ Some speaker notes here that might be useful.
 
 ![Marp bg 60%](https://raw.githubusercontent.com/marp-team/marp/master/marp.png)
 
+<!--
+Some speaker notes here that might be useful.
+-->
+
 ---
 
 ## <!--fit--> :raising_hand_man: :raising_hand: :raising_hand_woman:
 
+<!--
+Some speaker notes here that might be useful.
+-->
+
 ---
 
 <!--
+Some speaker notes here that might be useful.
+
 TODO: Recapitulate DevOps, SRE, Platform, Governance
 -->
 
 ---
 
 <!--
+Some speaker notes here that might be useful.
+
 TODO: Governance Engineering
 -->
 
@@ -67,13 +71,6 @@ Some speaker notes here that might be useful.
 A service that enables users to govern Azure resources by enforcing organizational standards and assessing compliance at scale.
 
 Common use cases for Azure Policy include implementing governance for resource consistency, regulatory compliance, security, cost, and management. Policy definitions for these common use cases are already available in your Azure environment as built-ins to help you get started.
--->
-
-<!--
-Resources:
-- https://learn.microsoft.com/en-us/azure/governance/policy/overview
-- https://learn.microsoft.com/en-us/azure/architecture/icons/
-- https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V17.zip
 -->
 
 ---
@@ -106,6 +103,14 @@ Some speaker notes here that might be useful.
 
 Leonard Sheng² Lee
 [GitHub](https://github.com/sheeeng) (https://github.com/sheeeng)
+
+<!--
+Some speaker notes here that might be useful.
+-->
+
+---
+
+This page intentionally left blank.
 
 <!--
 Some speaker notes here that might be useful.
