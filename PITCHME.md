@@ -271,7 +271,7 @@ $policyDefinition = Get-AzPolicyDefinition `
 
 Resources ✅
 
-Resouce Groups 🤔
+Resource Groups 🤔
 
 ---
 
