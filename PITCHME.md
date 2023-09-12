@@ -84,13 +84,13 @@ While features moved through the organization swiftly, their governance process 
 
 ## Governance Engineering
 
-[Applying SRE Principles to Regulated Software - Bill Bensing](https://itrevolution.com/articles/governance-engineering/)
+[Applying SRE Principles to Regulated Software](https://itrevolution.com/articles/governance-engineering/) <br/> Bill Bensing
 
 ---
 
 ## Governance Engineering
 
-[Under Control: Why Governance Engineering is Coming to Cloud Native - Ian Miell](https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native)
+[Under Control: Why Governance Engineering <br/> is Coming to Cloud Native](https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native) <br/> Ian Miell
 
 <!--
 Some speaker notes here that might be useful.
@@ -154,6 +154,13 @@ Some speaker notes here that might be useful.
 A service that enables users to govern Azure resources by enforcing organizational standards and assessing compliance at scale.
 
 Common use cases for Azure Policy include implementing governance for resource consistency, regulatory compliance, security, cost, and management. Policy definitions for these common use cases are already available in your Azure environment as built-ins to help you get started.
+
+For example: a control description might be: ‘S3 buckets must not be available across the Internet’. Control implementations come in three classes: preventative, detective, and reactive. For this control the implementations might be:
+
+    A CSP policy written in a product such as Azure Policy (preventative), or
+    Attempting to connect to each S3 bucket in turn across the Internet and reporting any that allow access (detective), or
+    Deleting each S3 bucket that is detected as being open to the Internet (reactive)
+
 -->
 
 ---
@@ -176,6 +183,138 @@ Azure Policy establishes conventions for resources. Policy definitions describe 
 
 ---
 
+## **[Azure Policy: BuiltIn Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+```powershell
+$policyDefinition = Get-AzPolicyDefinition `
+    -BuiltIn | Where-Object `
+    {$_.Properties.DisplayName -eq 'Require a tag on resources'}
+
+# OR
+
+    {$_.Properties.DisplayName -eq 'Allowed locations for resource groups'}
+
+# OR
+
+    {$_.Properties.DisplayName -eq 'Allowed locations'}
+```
+
+---
+
+## **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+```json
+{
+    "properties": {
+        "displayName": "AuditResourcesTags",
+        "policyType": "Custom",
+        "mode": "All",
+        "description": "Enforces required tags and its value on resources.",
+        "metadata": {
+            "version": "1.0.0",
+            "category": "Tags"
+        },
+        //...
+```
+
+---
+
+```json
+        //...
+        "parameters": {
+            //...
+            "tagName5": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Fifth Tag Name",
+                    "description": "Name of the tag, such as 'environment'."
+                }
+            },
+            "tagValue5": {
+                "type": "String",
+                "metadata": {
+                    "displayName": "Fifth Tag Value",
+                    "description": "Value of the tag, such as 'production'."
+                }
+            }
+        },
+        //...
+```
+
+---
+
+```json
+        //...
+        "policyRule": {
+            "if": {
+                "not": {
+                    "anyOf": [
+                        //...
+                        {
+                            "field": "[concat('tags[', parameters('tagName5'), ']')]",
+                            "equals": "[parameters('tagValue5')]"
+                        }
+                    ]
+                }
+            },
+            "then": {
+                "effect": "audit"
+            }
+        }
+    }
+}
+```
+
+---
+
+## **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+Resources ✅
+
+Resouce Groups 🤔
+
+---
+
+```json
+        //...
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+                    },
+                    {
+                        "not": {
+                            "anyOf": [
+                                //...
+                                {
+                                    "field": "[concat('tags[', parameters('tagName5'), ']')]",
+                                    "equals": "[parameters('tagValue5')]"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            "then": { "effect": "audit" }
+        }
+    }
+}
+```
+
+---
+
+## **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+```powershell
+New-AzPolicyDefinition `
+        -Name $Name `
+        -Policy $FilePath `
+```
+
+---
+
 ![bg right 40%](./assets/icons/10316-icon-service-Policy.svg)
 
 ## **[Azure Policy: Assignment](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#assignment)**
@@ -191,6 +330,86 @@ A JSON-defined object that determines the resources to which a policy definition
 
 Policy assignments are used by Azure Policy to define which resources are assigned which policies or initiatives. The policy assignment can determine the values of parameters for that group of resources at assignment time, making it possible to reuse policy definitions that address the same resource properties with different needs for compliance.
 -->
+
+---
+
+Assignment Example
+Require resources to have a 'Creator` tag.
+
+```powershell
+$policyParameterObject = @{ 'tagName' = 'Creator' }
+
+$message="Creator tag is required for resources."
+$nonComplianceMessages = @( @{Message=$message} )
+
+$policyAssignment = New-AzPolicyAssignment `
+        -Name $REQUIRE_RESOURCES_CREATOR_TAG `
+        -Scope "/subscriptions/$($azContext.Subscription.Id)" `
+        -PolicyDefinition $policyDefinition `
+        -PolicyParameterObject $policyParameterObject `
+        -NonComplianceMessage $nonComplianceMessages
+```
+
+---
+
+Assignment Example
+Require resources reside in allowed locations.
+
+```powershell
+$allowedLocations = Get-AzLocation `
+    | Where-Object `
+    {($_.DisplayName -like '*europe*') -or ($_.DisplayName -like '*norway*')}
+
+$policyParameterObject = @{'listOfAllowedLocations'=($allowedLocations.location)}
+
+$message="The selected locations are not allowed for resources."
+$nonComplianceMessages = @( @{Message=$message} )
+
+$policyAssignment = New-AzPolicyAssignment `
+    -Name $REQUIRE_RESOURCES_ALLOWED_LOCATIONS `
+    -Scope "/subscriptions/$($azContext.Subscription.Id)" `
+    -PolicyDefinition $policyDefinition `
+    -PolicyParameterObject $policyParameterObject `
+    -NonComplianceMessage $nonComplianceMessages
+}
+```
+
+---
+
+Assignment Example
+Audit resources to have the five tags. (Part 1/2)
+
+```powershell
+$policyParameterObject = @{
+    'tagName1' = 'Organization'
+    'tagValue1' = 'Acme Corporation'
+    'tagName2' = 'BusinessUnit'
+    'tagValue2' = 'Road Runner'
+    'tagName3' = 'ProjectOwner'
+    'tagValue3' = 'Wile E. Coyote'
+    'tagName4' = 'Application'
+    'tagValue4' = 'Beep-Beep!'
+    'tagName5' = 'Environment'
+    'tagValue5' = 'Fast and Furry-ous'
+}
+```
+
+---
+
+Assignment Example
+Audit resources to have the five tags. (Part 2/2)
+
+```powershell
+$message="Required tags and its values are needed for resources."
+$nonComplianceMessages = @( @{Message=$message} )
+
+$policyAssignment = New-AzPolicyAssignment `
+    -Name $AUDIT_RESOURCES_TAGS `
+    -Scope "/subscriptions/$($azContext.Subscription.Id)" `
+    -PolicyDefinition $policyDefinition `
+    -PolicyParameterObject $policyParameterObject `
+    -NonComplianceMessage $nonComplianceMessages
+```
 
 ---
 
