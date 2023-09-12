@@ -82,13 +82,13 @@ While features moved through the organization swiftly, their governance process 
 
 ---
 
-## Governance Engineering
+## Governance Engineering <br/> (SRE)
 
 [Applying SRE Principles to Regulated Software](https://itrevolution.com/articles/governance-engineering/) <br/> Bill Bensing
 
 ---
 
-## Governance Engineering
+## Governance Engineering <br/> (Cloud Native)
 
 [Under Control: Why Governance Engineering <br/> is Coming to Cloud Native](https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native) <br/> Ian Miell
 
@@ -112,7 +112,7 @@ However, that may change soon.
 
 ---
 
-## Governance Engineering
+## Governance Engineering <br/> (DORA)
 
 #### [Digital Operational Resilience Act (DORA)](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
 
@@ -140,13 +140,13 @@ At the moment, audits of controls take place on a cadence in the years, and are 
 
 ---
 
-![bg right 40%](./assets/icons/10316-icon-service-Policy.svg)
+![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
 
-## **[Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview)**
+### **[Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview)**
 
 #### Enforce Standards & Assess Compliance
 
-[![h:1.5em](https://img.shields.io/badge/-Azure%20Policy%20Glossary-darkgreen?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary)
+[![h:1.5em](https://img.shields.io/badge/-Azure%20Policy%20Glossary%20Docs-darkgreen?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary)
 
 <!--
 Some speaker notes here that might be useful.
@@ -165,13 +165,13 @@ For example: a control description might be: ‘S3 buckets must not be available
 
 ---
 
-![bg right 40%](./assets/icons/10316-icon-service-Policy.svg)
+![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
 
-## **[Azure Policy: Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+### **[Azure Policy: Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
-#### Establishes Conventions for Resources
+#### Establishes conventions for resources.
 
-[![h:1.5em](https://img.shields.io/badge/-Definition%20Structure-blue?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure)
+[![h:1.5em](https://img.shields.io/badge/-Definition%20Structure%20Docs-blue?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure)
 
 <!--
 Some speaker notes here that might be useful.
@@ -183,7 +183,27 @@ Azure Policy establishes conventions for resources. Policy definitions describe 
 
 ---
 
-## **[Azure Policy: BuiltIn Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+### **[Azure Policy: BuiltIn Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+```powershell
+Get-AzPolicyDefinition -BuiltIn `
+    | Where-Object {$_.Properties.metadata.category -eq 'Tags'} `
+    | Select-Object -ExpandProperty properties `
+    | Select-Object -Property DisplayName `
+    | Format-List
+
+# OR
+
+    | Where-Object {$_.Properties.metadata.category -eq 'Storage'} `
+
+# OR
+
+    | Where-Object {$_.Properties.metadata.category -eq 'Regulatory Compliance'} `
+```
+
+---
+
+### **[Azure Policy: BuiltIn Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
 ```powershell
 $policyDefinition = Get-AzPolicyDefinition `
@@ -201,7 +221,7 @@ $policyDefinition = Get-AzPolicyDefinition `
 
 ---
 
-## **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+### **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
 ```json
 {
@@ -267,7 +287,21 @@ $policyDefinition = Get-AzPolicyDefinition `
 
 ---
 
-## **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
+
+### **[Azure Policy: Effects](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+#### What happens when the policy rule is matched?
+
+[![h:1.5em](https://img.shields.io/badge/-Effects%20Docs-blue?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects)
+
+<!--
+Some speaker notes here that might be useful.
+-->
+
+---
+
+### **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
 Resources ✅
 
@@ -305,23 +339,23 @@ Resource Groups 🤔
 
 ---
 
-## **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+### **[Azure Policy: Create Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
 ```powershell
 New-AzPolicyDefinition `
         -Name $Name `
-        -Policy $FilePath `
+        -Policy $FilePath
 ```
 
 ---
 
-![bg right 40%](./assets/icons/10316-icon-service-Policy.svg)
+![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
 
-## **[Azure Policy: Assignment](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#assignment)**
+### **[Azure Policy: Assignment](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#assignment)**
 
-#### Determines Resources where Definition is Applied
+#### Determines the resources to which a policy definition is applied.
 
-[![h:1.5em](https://img.shields.io/badge/-Assignment%20Structure-purple?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/assignment-structure)
+[![h:1.5em](https://img.shields.io/badge/-Assignment%20Structure%20Docs-purple?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/assignment-structure)
 
 <!--
 Some speaker notes here that might be useful.
