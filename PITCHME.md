@@ -24,6 +24,8 @@ Some speaker notes here that might be useful.
 
 ---
 
+<!-- transition: explode -->
+
 ## <!--fit--> :raising_hand_man: :raising_hand: :raising_hand_woman:
 
 <!--
@@ -31,6 +33,8 @@ Some speaker notes here that might be useful.
 -->
 
 ---
+
+<!-- transition: fade -->
 
 ### DevOps <br/> Site Reliability Engineering <br/> Platform Engineering <br/> Governance Engineering
 
@@ -44,6 +48,8 @@ Platform Engineering provides a curated set of tools, capabilities and processes
 -->
 
 ---
+
+<!-- transition: fade-out -->
 
 ![bg fit](./assets/books/9781942788294.jpeg)
 ![bg fit](./assets/books/9781950508402.jpeg)
