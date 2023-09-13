@@ -32,7 +32,7 @@ Some speaker notes here that might be useful.
 
 ---
 
-### DevOps <br/> Site Reliability Engineering <br/> Platform Engineering <br/> Governance Engineering
+### DevOps <br/>Site Reliability Engineering (SRE) <br/><br/> 👨🏻‍💻 Platform Engineering 👩🏻‍💻
 
 <!--
 Some speaker notes here that might be useful.
@@ -41,6 +41,15 @@ Gartner Top 10 Strategic Technology Trends for 2023
 https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2023
 
 Platform Engineering provides a curated set of tools, capabilities and processes that are packaged for easy consumption by developers and end users. It will increase end users’ productivity and reduce the burden on development teams.
+-->
+
+---
+
+
+### DevOps <br/> Site Reliability Engineering (SRE) <br/> Platform Engineering <br/><br/> ✨ Governance Engineering ✨
+
+<!--
+Some speaker notes here that might be useful.
 -->
 
 ---
@@ -82,7 +91,7 @@ While features moved through the organization swiftly, their governance process 
 
 ---
 
-## Governance Engineering <br/> (SRE)
+## Governance Engineering (SRE)
 
 [Applying SRE Principles to Regulated Software](https://itrevolution.com/articles/governance-engineering/) <br/> Bill Bensing
 
@@ -146,11 +155,10 @@ For example: a control description might be: ‘S3 buckets must not be available
 
 ---
 
-![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
-
+![bg right:35% 55%](./assets/icons/10316-icon-service-Policy.svg)
 ### **[Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/overview)**
 
-#### Enforce Standards & Assess Compliance
+#### Enforce Standards <br/> & Assess Compliance
 
 [![h:1.5em](https://img.shields.io/badge/-Azure%20Policy%20Glossary%20Docs-darkgreen?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary)
 
@@ -165,7 +173,18 @@ Common use cases for Azure Policy include implementing governance for resource c
 
 ---
 
-![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
+![bg height:80%](./assets/miscellaneous/AzurePortalBladeTop.png)
+![bg height:80%](./assets/miscellaneous/AzurePortalBladeBottom.png)
+
+---
+
+![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
+
+## Demonstration: <br/> Built-In Azure Policy Definition on Azure Portal
+
+---
+
+![bg right:35% 55%](./assets/icons/10316-icon-service-Policy.svg)
 
 ### **[Azure Policy: Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
@@ -179,6 +198,20 @@ Some speaker notes here that might be useful.
 A JSON-defined object that describes a policy, including resource compliance requirements and the effect to take if they are violated. Learn more about the policy definition JSON structure here: Azure Policy definition structure.
 
 Azure Policy establishes conventions for resources. Policy definitions describe resource compliance conditions and the effect to take if a condition is met. A condition compares a resource property field or a value to a required value.
+-->
+
+---
+
+![bg right:35% 55%](./assets/icons/10316-icon-service-Policy.svg)
+
+### **[Azure Policy: Effects](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+#### What happens when the policy rule is matched?
+
+[![h:1.5em](https://img.shields.io/badge/-Effects%20Docs-blue?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects)
+
+<!--
+Some speaker notes here that might be useful.
 -->
 
 ---
@@ -287,25 +320,9 @@ $policyDefinition = Get-AzPolicyDefinition `
 
 ---
 
-![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
+### **[Azure Policy: Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
-### **[Azure Policy: Effects](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
-
-#### What happens when the policy rule is matched?
-
-[![h:1.5em](https://img.shields.io/badge/-Effects%20Docs-blue?style=for-the-badge&logo=none)](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/effects)
-
-<!--
-Some speaker notes here that might be useful.
--->
-
----
-
-### **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
-
-Resources ✅
-
-Resource Groups 🤔
+#### Resources vs. Resource Groups
 
 ---
 
@@ -343,13 +360,14 @@ Resource Groups 🤔
 
 ```powershell
 New-AzPolicyDefinition `
-        -Name $Name `
-        -Policy $FilePath
+        -Name $name `
+        -Policy $policyFilePath `
+        -SubscriptionId $subscriptionId
 ```
 
 ---
 
-![bg right:40% 50%](./assets/icons/10316-icon-service-Policy.svg)
+![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
 
 ### **[Azure Policy: Assignment](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#assignment)**
 
@@ -364,6 +382,12 @@ A JSON-defined object that determines the resources to which a policy definition
 
 Policy assignments are used by Azure Policy to define which resources are assigned which policies or initiatives. The policy assignment can determine the values of parameters for that group of resources at assignment time, making it possible to reuse policy definitions that address the same resource properties with different needs for compliance.
 -->
+
+---
+
+![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
+
+## Demonstration: <br/> Azure Policy Assignments on Azure Portal
 
 ---
 
@@ -447,7 +471,20 @@ $policyAssignment = New-AzPolicyAssignment `
 
 ---
 
-### <!--fit--> :question:
+![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
+
+## Demonstration: <br/> Create resources that violates Azure Policy on Azure Portal.
+
+---
+
+![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
+
+
+## Demonstration: <br/> Create resources that violates Azure Policy from Instrasture as Code.
+
+---
+
+### <!--fit--> :thinking: :question:
 
 <!--
 Some speaker notes here that might be useful.
