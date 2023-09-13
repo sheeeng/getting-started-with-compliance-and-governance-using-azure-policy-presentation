@@ -480,7 +480,7 @@ $policyAssignment = New-AzPolicyAssignment `
 ![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
 
 
-## Demonstration: <br/> Create resources that violates Azure Policy from Instrasture as Code.
+## Demonstration: <br/> Create resources that violates Azure Policy from Infrastructure as Code.
 
 ---
 
