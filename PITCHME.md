@@ -136,6 +136,12 @@ Although the act is slated to become law from January 17, 2025, the technical st
 Some speaker notes here that might be useful.
 
 At the moment, audits of controls take place on a cadence in the years, and are carried out ‘by hand’ by auditors whose job it is to seek out evidence of the adherence to, and effectiveness of, controls.
+
+For example: a control description might be: ‘S3 buckets must not be available across the Internet’. Control implementations come in three classes: preventative, detective, and reactive. For this control the implementations might be:
+
+    A CSP policy written in a product such as Azure Policy (preventative), or
+    Attempting to connect to each S3 bucket in turn across the Internet and reporting any that allow access (detective), or
+    Deleting each S3 bucket that is detected as being open to the Internet (reactive)
 -->
 
 ---
@@ -154,12 +160,6 @@ Some speaker notes here that might be useful.
 A service that enables users to govern Azure resources by enforcing organizational standards and assessing compliance at scale.
 
 Common use cases for Azure Policy include implementing governance for resource consistency, regulatory compliance, security, cost, and management. Policy definitions for these common use cases are already available in your Azure environment as built-ins to help you get started.
-
-For example: a control description might be: ‘S3 buckets must not be available across the Internet’. Control implementations come in three classes: preventative, detective, and reactive. For this control the implementations might be:
-
-    A CSP policy written in a product such as Azure Policy (preventative), or
-    Attempting to connect to each S3 bucket in turn across the Internet and reporting any that allow access (detective), or
-    Deleting each S3 bucket that is detected as being open to the Internet (reactive)
 
 -->
 
