@@ -19,7 +19,7 @@ html: true
 <style scoped>a { color: #36d; }</style>
 
 <!--
-Some speaker notes here that might be useful.
+Welcome!
 -->
 
 ---
@@ -27,44 +27,27 @@ Some speaker notes here that might be useful.
 ## <!--fit--> :raising_hand_man: :raising_hand: :raising_hand_woman:
 
 <!--
-Some speaker notes here that might be useful.
+Ice-breaker: Remember the names of people around you.
 -->
 
 ---
 
-### 👨🏻‍💻 _DevOps_ 👩‍💻
+### 👨🏻‍💻 _DevOps, DevSecOps, GitOps_ 👩‍💻
 
 <!--
-Some speaker notes here that might be useful.
--->
+Used as a set of practices and tools, DevOps integrates and automates the work of software development (Dev) and IT operations (Ops) as a means for improving and shortening the systems development life cycle.
 
----
+In 2009, the first conference named DevOps Days was held in Ghent, Belgium. The conference was founded by Belgian consultant, project manager and agile practitioner Patrick Debois. The conference has now spread to other countries.
 
-### DevOps <br/><br/> 👨🏽‍💻 _Site Reliability Engineering (SRE)_ 👩🏽‍💻
+As of 2014, the annual State of DevOps report was published by Nicole Forsgren, Gene Kim, Jez Humble and others.
 
-<!--
-Some speaker notes here that might be useful.
--->
+Forsgren was CEO and co-founder of DevOps Research and Assessment LLC (DORA) with Jez Humble and Gene Kim. In 2018 DORA was purchased by Google.
 
----
+When security teams adopt a DevOps approach, security is an active and integrated part of the development process. This is called DevSecOps.
+https://www.atlassian.com/devops
 
-### DevOps <br/> Site Reliability Engineering (SRE) <br/><br/> 👨🏻‍💻 _Platform Engineering_ 👩🏻‍💻
-
-<!--
-Some speaker notes here that might be useful.
-
-Gartner Top 10 Strategic Technology Trends for 2023
-https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2023
-
-Platform Engineering provides a curated set of tools, capabilities and processes that are packaged for easy consumption by developers and end users. It will increase end users’ productivity and reduce the burden on development teams.
--->
-
----
-
-### DevOps <br/> Site Reliability Engineering (SRE) <br/> Platform Engineering <br/><br/> ✨ _Governance Engineering_ ✨
-
-<!--
-Some speaker notes here that might be useful.
+GitOps uses Git repositories as a single source of truth to deliver infrastructure as code.
+https://www.redhat.com/en/topics/devops/what-is-gitops
 -->
 
 ---
@@ -92,12 +75,62 @@ Publisher : IT Revolution Press (November 26, 2019)
 
 ---
 
+### DevOps, DevSecOps, GitOps <br/><br/> 👨🏽‍💻 _Site Reliability Engineering (SRE)_ 👩🏽‍💻
+
+<!--
+Site Reliability Engineering (SRE) uses software engineering to automate IT operations tasks that would normally be performed by system administrators.
+
+DevOps is going to automate deployment. They’re going to automate tasks and features. SRE is going to automate redundancy, and they’re going to automate manual tasks that they can turn into programmatic tasks to keep the stack up and running.
+
+SRE teams focus on monitoring metrics related to latency, traffic, uptime and error rates to ensure the reliability and availability of systems.
+
+https://www.splunk.com/en_us/blog/learn/sre-vs-devops-vs-platform-engineering.html
+-->
+
+---
+
+### DevOps, DevSecOps, GitOps <br/> Site Reliability Engineering (SRE) <br/><br/> 👨🏻‍💻 _Platform Engineering_ 👩🏻‍💻
+
+<!--
+Some speaker notes here that might be useful.
+
+In contrast, Platform Engineering teams measure:
+Infrastructure productivity like lead time, deployment frequency, etc.)
+Stability like MTTR, change failure rate, etc.
+Efficiency metrics like resource allocation to ensure efficient management of infrastructure.
+
+https://www.splunk.com/en_us/blog/learn/sre-vs-devops-vs-platform-engineering.html
+
+Gartner Top 10 Strategic Technology Trends for 2023
+https://www.gartner.com/en/articles/gartner-top-10-strategic-technology-trends-for-2023
+
+Platform Engineering provides a curated set of tools, capabilities and processes that are packaged for easy consumption by developers and end users. It will increase end users’ productivity and reduce the burden on development teams.
+-->
+
+---
+
+### DevOps, DevSecOps, GitOps <br/> Site Reliability Engineering (SRE) <br/> Platform Engineering <br/><br/> ✨ _Governance Engineering_ ✨
+
+<!--
+
+-->
+
+---
+
 ![bg left:30% fit](./assets/books/9781950508532.jpeg)
 
 “Good strategy and good governance are the grease and guide rails for success.” - [Bill Bensing](https://www.amazon.com/Investments-Unlimited-Compliance-Thriving-Digital/dp/1950508536)
 
 <!--
-Some speaker notes here that might be useful.
+Although each discipline has its own set of responsibilities, certainly their work overlaps. Today, all three roles are interconnected to ensure smooth software development, delivery, and production systems are running without issues.
+
+All three roles promote close collaboration and communication between developers, operations teams and stakeholders to ensure that everyone is aligned on their business requirements, goals, and issues by accommodating each other's needs.
+
+SREs work closely with DevOps engineers to ensure that most of their development, testing, and deployment tasks are automated. They ensure that CI/CD pipelines are optimized for speed and efficiency.
+DevOps engineers also collaborate with Platform Engineers to ensure they have the required infrastructure, workflows, and tools to support the development and ensure smooth deployment. Both roles collaborate to create flexible and scalable platforms that meet the requirements of development teams.
+SREs teams partner with Platform Engineers to establish reliable, scalable and secure infrastructure. Additionally, they implement the necessary monitoring and alerting tools to identify and respond to issues faster.
+
+https://www.splunk.com/en_us/blog/learn/sre-vs-devops-vs-platform-engineering.html
 
 In the vein of the bestselling The Phoenix Project and The Unicorn Project, Investments Unlimited radically rethinks how organizations can handle the audit, compliance, and security of their software systems―even in highly regulated industries. By introducing concepts, tools, and ideas to reimagine governance, Investments Unlimited catalyzes a more humane way to enable high-velocity software delivery that is inherently more secure.
 
