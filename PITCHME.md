@@ -563,6 +563,53 @@ $policyAssignment = New-AzPolicyAssignment `
 
 ---
 
+![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
+
+## Demonstration: <br/> Create resources that violates Azure Policy through Infrastructure as Code.
+
+---
+
+```bicep
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+  name: uniqueStorageName
+  location: location
+  sku: {
+    name: storageSKU
+  }
+  kind: 'StorageV2'
+  properties: {
+    supportsHttpsTrafficOnly: true
+  }
+  tags: null
+}
+```
+
+---
+
+![giffiti](./assets/miscellaneous/ViggoVennBicep.gif)
+
+<style scoped>img[alt="giffiti"] {
+    border: 3px solid #008AD7;
+    width: 80%;
+}
+</style>
+
+---
+
+![bg 55%](./assets/icons/Bicep.svg)
+
+<!--
+You can think of Bicep as a revision to the existing Azure Resource Manager template (ARM template) language rather than a new language.
+
+Bicep is a domain-specific language (DSL) that uses declarative syntax to deploy Azure resources. In a Bicep file, you define the infrastructure you want to deploy to Azure, and then use that file throughout the development lifecycle to repeatedly deploy your infrastructure. Your resources are deployed in a consistent manner.
+
+Support for all resource types and API versions: Bicep immediately supports all preview and GA versions for Azure services. As soon as a resource provider introduces new resource types and API versions, you can use them in your Bicep file. You don't have to wait for tools to be updated before using the new services.
+
+Simple syntax: When compared to the equivalent JSON template, Bicep files are more concise and easier to read. Bicep requires no previous knowledge of programming languages. Bicep syntax is declarative and specifies which resources and resource properties you want to deploy.
+-->
+
+---
+
 ```terraform
 resource "azurerm_storage_account" "deleteme654" {
   name                     = "deleteme654"
@@ -608,6 +655,15 @@ resource "azurerm_storage_account" "deleteme654" {
         "type": "PolicyViolation"
     }
 ]
+```
+
+---
+
+```bicep
+resource newRG 'Microsoft.Resources/resourceGroups@2021-01-01' = {
+  name: resourceGroupName
+  location: 'Taiwan North'
+}
 ```
 
 ---
