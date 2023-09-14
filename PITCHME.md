@@ -530,10 +530,129 @@ $policyAssignment = New-AzPolicyAssignment `
 
 ---
 
-![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
+```terraform
+resource "azurerm_storage_account" "deleteme654" {
+  name                     = "deleteme654"
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.name
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  tags                     = null
+}
+```
 
+---
 
-## Demonstration: <br/> Create resources that violates Azure Policy from Infrastructure as Code.
+```json
+[
+    {
+        "info": {
+            "evaluationDetails": {
+                "evaluatedExpressions": [
+                    {
+                        "expression": "tags[Creator]",
+                        "expressionKind": "Field",
+                        "operator": "Exists",
+                        "path": "tags[Creator]",
+                        "result": "True",
+                        "targetValue": "false"
+                    }
+                ],
+                "reason": "Creator tag is required for resources."
+            },
+            "policyAssignmentId": "/subscriptions/***/providers/Microsoft.Authorization/policyAssignments/RequireResourcesCreatorTag",
+            "policyAssignmentName": "RequireResourcesCreatorTag",
+            "policyAssignmentParameters": {
+                "tagName": "Creator"
+            },
+            "policyAssignmentScope": "/subscriptions/***",
+            "policyDefinitionDisplayName": "Require a tag on resources",
+            "policyDefinitionEffect": "deny",
+            "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99",
+            "policyDefinitionName": "871b6d14-10aa-478d-b590-94f262ecfa99",
+            "policyExemptionIds": []
+        },
+        "type": "PolicyViolation"
+    }
+]
+```
+
+---
+
+```terraform
+resource "azurerm_resource_group" "deleteme987" {
+  name     = "deleteme987"
+  location = "Taiwan North"
+}
+```
+
+---
+
+```json
+[
+  {
+    "info": {
+      "evaluationDetails": {
+        "evaluatedExpressions": [
+          {
+            "expression": "type",
+            "expressionKind": "Field",
+            "expressionValue": "Microsoft.Resources/subscriptions/resourcegroups",
+            "operator": "Equals",
+            "path": "type",
+            "result": "True",
+            "targetValue": "Microsoft.Resources/subscriptions/resourceGroups"
+          },
+          {
+            "expression": "location",
+            "expressionKind": "Field",
+            "expressionValue": "taiwannorth",
+            "operator": "NotIn",
+            "path": "location",
+            "result": "True",
+            "targetValue": [
+              "northeurope",
+              "westeurope",
+              "norwayeast",
+              "europe",
+              "norway",
+              "norwaywest"
+            ]
+          }
+        ],
+        "reason": "The selected locations are not allowed for resource groups."
+      },
+      //...
+```
+
+---
+
+```json
+      //...
+      "policyAssignmentId": "/subscriptions/***/providers/Microsoft.Authorization/policyAssignments/RequireResourceGroupsAllowedLocations",
+      "policyAssignmentName": "RequireResourceGroupsAllowedLocations",
+      "policyAssignmentParameters": {
+        "listOfAllowedLocations": [
+          "northeurope",
+          "westeurope",
+          "norwayeast",
+          "europe",
+          "norway",
+          "norwaywest"
+        ]
+      },
+      "policyAssignmentScope": "/subscriptions/***",
+      "policyDefinitionDisplayName": "Allowed locations for resource groups",
+      "policyDefinitionEffect": "deny",
+      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988",
+      "policyDefinitionName": "e765b5de-1225-4ba3-bd56-1ac6695af988",
+      "policyExemptionIds": []
+    },
+    "type": "PolicyViolation"
+  }
+]
+
+```
 
 ---
 
