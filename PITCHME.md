@@ -32,7 +32,23 @@ Some speaker notes here that might be useful.
 
 ---
 
-### DevOps <br/>Site Reliability Engineering (SRE) <br/><br/> 👨🏻‍💻 Platform Engineering 👩🏻‍💻
+### 👨🏻‍💻 _DevOps_ 👩‍💻
+
+<!--
+Some speaker notes here that might be useful.
+-->
+
+---
+
+### DevOps <br/><br/> 👨🏽‍💻 _Site Reliability Engineering (SRE)_ 👩🏽‍💻
+
+<!--
+Some speaker notes here that might be useful.
+-->
+
+---
+
+### DevOps <br/> Site Reliability Engineering (SRE) <br/><br/> 👨🏻‍💻 _Platform Engineering_ 👩🏻‍💻
 
 <!--
 Some speaker notes here that might be useful.
@@ -45,8 +61,7 @@ Platform Engineering provides a curated set of tools, capabilities and processes
 
 ---
 
-
-### DevOps <br/> Site Reliability Engineering (SRE) <br/> Platform Engineering <br/><br/> ✨ Governance Engineering ✨
+### DevOps <br/> Site Reliability Engineering (SRE) <br/> Platform Engineering <br/><br/> ✨ _Governance Engineering_ ✨
 
 <!--
 Some speaker notes here that might be useful.
@@ -97,7 +112,7 @@ While features moved through the organization swiftly, their governance process 
 
 ---
 
-## Governance Engineering <br/> (Cloud Native)
+## Governance Eng. (Cloud Native)
 
 [Under Control: Why Governance Engineering <br/> is Coming to Cloud Native](https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native) <br/> Ian Miell
 
@@ -121,9 +136,7 @@ However, that may change soon.
 
 ---
 
-## Governance Engineering <br/> (DORA)
-
-#### [Digital Operational Resilience Act (DORA)](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
+## [Digital Operational Resilience Act (DORA)](https://eur-lex.europa.eu/eli/reg/2022/2554/oj)
 
 "To put it plainly, regulators are going to expect compliance and audit functions to have the ability to report on their controls regularly, efficiently and clearly." - [Ian Miell](https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native)
 
@@ -135,11 +148,23 @@ Although the act is slated to become law from January 17, 2025, the technical st
 
 ---
 
-## Governance Engineering
+## Controlling Controls
 
-#### Controls <br/> Description vs. Implementation
+ [**_Description_**]((https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native)) vs. Implementation
 
-"Efficiency and Speed, Accuracy and Consistency, Transparency, Scalability, and Adaptability." - [Ian Miell](https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native)
+<br/>
+
+- Azure resources must exist only in allowed locations. <br/> For example, Norway or Europe regions.
+
+---
+
+## Controlling Controls
+
+Description vs. [**_Implementation_**]((https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native))
+
+<br/>
+
+- A Cloud Service Provider policy written in a product. <br/> For example, Azure Policy.
 
 <!--
 Some speaker notes here that might be useful.
@@ -151,6 +176,28 @@ For example: a control description might be: ‘S3 buckets must not be available
     A CSP policy written in a product such as Azure Policy (preventative), or
     Attempting to connect to each S3 bucket in turn across the Internet and reporting any that allow access (detective), or
     Deleting each S3 bucket that is detected as being open to the Internet (reactive)
+-->
+
+---
+
+## Governance Engineering
+
+- Efficiency and Speed
+- Accuracy and Consistency
+- Transparency, Scalability
+- Adaptability
+ <br/> - [Ian Miell](https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native)
+
+<!--
+Efficiency and Speed: Automation can drastically reduce the time spent on manual audit tasks, allowing for quicker assessments and responses. This enables companies to conduct continuous audits with fewer resources.
+
+Accuracy and Consistency: Automated controls reduce the risk of human error and ensure consistency in the application of audit rules, resulting in more accurate and reliable audit results.
+
+Transparency: Automation provides real-time visibility into audit processes and outcomes, making it easier for stakeholders to monitor compliance, auditors to demonstrate compliance, and regulators to evaluate the results.
+
+Scalability: As companies grow, so do their auditing needs. Automated controls can be easily scaled up to match the pace of growth, reducing the need for additional auditing resources.
+
+Adaptability: In the fast-paced cloud environment, compliance requirements are constantly evolving. Automated controls can be more easily updated to reflect new regulations and standards, keeping companies agile in the face of change.
 -->
 
 ---
@@ -175,12 +222,6 @@ Common use cases for Azure Policy include implementing governance for resource c
 
 ![bg height:80%](./assets/miscellaneous/AzurePortalBladeTop.png)
 ![bg height:80%](./assets/miscellaneous/AzurePortalBladeBottom.png)
-
----
-
-![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
-
-## Demonstration: <br/> Built-In Azure Policy Definition on Azure Portal
 
 ---
 
@@ -213,6 +254,16 @@ Azure Policy establishes conventions for resources. Policy definitions describe 
 <!--
 Some speaker notes here that might be useful.
 -->
+
+---
+
+![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
+
+## Demonstration: <br/> Built-In Azure Policy Definition on Azure Portal
+
+---
+
+![bg](./assets/miscellaneous/AzurePolicyDefinitions.png)
 
 ---
 
@@ -273,7 +324,7 @@ $policyDefinition = Get-AzPolicyDefinition `
 ---
 
 ```json
-        //...
+        //... tagName1, tagValue1, tagName2, tagValue2, etc.
         "parameters": {
             //...
             "tagName5": {
@@ -302,7 +353,7 @@ $policyDefinition = Get-AzPolicyDefinition `
             "if": {
                 "not": {
                     "anyOf": [
-                        //...
+                        //... tagName1, tagName2, etc.
                         {
                             "field": "[concat('tags[', parameters('tagName5'), ']')]",
                             "equals": "[parameters('tagValue5')]"
@@ -310,9 +361,7 @@ $policyDefinition = Get-AzPolicyDefinition `
                     ]
                 }
             },
-            "then": {
-                "effect": "audit"
-            }
+            "then": { "effect": "audit" }
         }
     }
 }
@@ -320,9 +369,9 @@ $policyDefinition = Get-AzPolicyDefinition `
 
 ---
 
-### **[Azure Policy: Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+### **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
-#### Resources vs. Resource Groups
+#### What about Resource Groups?
 
 ---
 
@@ -338,7 +387,7 @@ $policyDefinition = Get-AzPolicyDefinition `
                     {
                         "not": {
                             "anyOf": [
-                                //...
+                                //... tagName1, tagName2, etc.
                                 {
                                     "field": "[concat('tags[', parameters('tagName5'), ']')]",
                                     "equals": "[parameters('tagValue5')]"
@@ -388,6 +437,10 @@ Policy assignments are used by Azure Policy to define which resources are assign
 ![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
 
 ## Demonstration: <br/> Azure Policy Assignments on Azure Portal
+
+---
+
+![bg](./assets/miscellaneous/AzurePolicyAssignments.png)
 
 ---
 
