@@ -69,6 +69,19 @@ Publisher : IT Revolution Press; Illustrated edition (October 6, 2016)
 Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations
 Publisher : IT Revolution Press; 1st edition (March 27, 2018)
 
+24 Key Capabilities inside 5 Categories:
+- Continuous Delivery
+- Architecture
+- Product and Process
+- Lean Management and Monitoring
+- Cultural
+
+Four Key Metrics:
+- Change Lead Time
+- Deployment Frequency
+- Change Failure Rate
+- Mean Time to Recovery
+
 The Unicorn Project
 Publisher : IT Revolution Press (November 26, 2019)
 -->
