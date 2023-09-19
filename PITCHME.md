@@ -309,7 +309,13 @@ Some speaker notes here that might be useful.
 
 ---
 
-![bg](./assets/miscellaneous/AzurePolicyDefinitions.png)
+![image](./assets/miscellaneous/AzurePolicyDefinitions.png)
+
+<style scoped>img[alt="image"] {
+    border: 3px solid #008AD7;
+    width: 90%;
+}
+</style>
 
 ---
 
@@ -486,11 +492,17 @@ Policy assignments are used by Azure Policy to define which resources are assign
 
 ---
 
-![bg](./assets/miscellaneous/AzurePolicyAssignments.png)
+![image](./assets/miscellaneous/AzurePolicyAssignments.png)
+
+<style scoped>img[alt="image"] {
+    border: 3px solid #008AD7;
+    width: 90%;
+}
+</style>
 
 ---
 
-Assignment Example
+Exhibit: Azure Policy Assignment
 Require resources to have a 'Creator` tag.
 
 ```powershell
@@ -509,7 +521,7 @@ $policyAssignment = New-AzPolicyAssignment `
 
 ---
 
-Assignment Example
+Exhibit: Azure Policy Assignment
 Require resources reside in allowed locations.
 
 ```powershell
@@ -533,7 +545,7 @@ $policyAssignment = New-AzPolicyAssignment `
 
 ---
 
-Assignment Example
+Exhibit: Azure Policy Assignment
 Audit resources to have the five tags. (Part 1/2)
 
 ```powershell
@@ -553,7 +565,7 @@ $policyParameterObject = @{
 
 ---
 
-Assignment Example
+Exhibit: Azure Policy Assignment
 Audit resources to have the five tags. (Part 2/2)
 
 ```powershell
@@ -576,26 +588,69 @@ $policyAssignment = New-AzPolicyAssignment `
 
 ---
 
+Exhibit: Missing Required Tag
+
+![image](./assets/miscellaneous/CreateAStorageAccountInvalidTag.png)
+
+<style scoped>img[alt="image"] {
+    border: 3px solid #008AD7;
+    width: 70%;
+}
+</style>
+
+---
+
+Exhibit: Missing Allowed Locations
+
+![image](./assets/miscellaneous/CreateAResourceGroupInvalidRegion.png)
+
+<style scoped>img[alt="image"] {
+    border: 3px solid #008AD7;
+    width: 65%;
+}
+</style>
+
+---
+
 ![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
 
 ## Demonstration: <br/> Create resources that violates Azure Policy through Infrastructure as Code.
 
 ---
 
-```bicep
-resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
-  name: uniqueStorageName
-  location: location
-  sku: {
-    name: storageSKU
-  }
-  kind: 'StorageV2'
-  properties: {
-    supportsHttpsTrafficOnly: true
-  }
-  tags: null
+## <!--fit--> :muscle:
+
+---
+
+Exhibit: [Azure Resource Manager (ARM) Templates](https://github.com/Azure/azure-quickstart-templates/blob/b41b420ccb55ff45a032b83b2f85e65d6fa16aae/quickstarts/microsoft.storage/storage-account-create/azuredeploy.json)
+
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+
+  //...
+
+  "resources": [
+    {
+      "name": "[format('store{0}', uniqueString(resourceGroup().id))]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2022-09-01",
+      "tags": {},
+      "location": "[resourceGroup().location]",
+      "kind": "StorageV2",
+      "sku": {
+        "name": "[parameters('storageAccountType')]"
+      }
+    }
+  ],
+  "outputs": {}
 }
 ```
+
+<!--
+https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-account-create/azuredeploy.json
+-->
 
 ---
 
@@ -622,6 +677,31 @@ Simple syntax: When compared to the equivalent JSON template, Bicep files are mo
 -->
 
 ---
+
+Exhibit: [Azure Bicep](https://github.com/Azure/azure-quickstart-templates/blob/b41b420ccb55ff45a032b83b2f85e65d6fa16aae/quickstarts/microsoft.storage/storage-account-create/main.bicep)
+
+```bicep
+resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
+  name: uniqueStorageName
+  location: location
+  sku: {
+    name: storageSKU
+  }
+  kind: 'StorageV2'
+  properties: {
+    supportsHttpsTrafficOnly: true
+  }
+  tags: null
+}
+```
+
+<!--
+https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.storage/storage-account-create/main.bicep
+-->
+
+---
+
+Exhibit: Terraform
 
 ```terraform
 resource "azurerm_storage_account" "deleteme654" {
@@ -672,6 +752,8 @@ resource "azurerm_storage_account" "deleteme654" {
 
 ---
 
+Exhibit: Azure Bicep
+
 ```bicep
 resource newRG 'Microsoft.Resources/resourceGroups@2021-01-01' = {
   name: resourceGroupName
@@ -680,6 +762,8 @@ resource newRG 'Microsoft.Resources/resourceGroups@2021-01-01' = {
 ```
 
 ---
+
+Exhibit: Terraform
 
 ```terraform
 resource "azurerm_resource_group" "deleteme987" {
