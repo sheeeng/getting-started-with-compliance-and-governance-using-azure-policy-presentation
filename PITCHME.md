@@ -88,6 +88,17 @@ Publisher : IT Revolution Press (November 26, 2019)
 
 ---
 
+![image](./assets/miscellaneous/dora-core-model-v1.1.1.png)
+
+<style scoped>img[alt="image"] {
+    border: 3px solid #008AD7;
+    width: 80%;
+}
+</style>
+
+
+---
+
 ### DevOps, DevSecOps, GitOps <br/><br/> 👨🏽‍💻 _Site Reliability Engineering (SRE)_ 👩🏽‍💻
 
 <!--
