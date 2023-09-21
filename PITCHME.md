@@ -96,7 +96,6 @@ Publisher : IT Revolution Press (November 26, 2019)
 }
 </style>
 
-
 ---
 
 ### DevOps, DevSecOps, GitOps <br/><br/> 👨🏽‍💻 _Site Reliability Engineering (SRE)_ 👩🏽‍💻
