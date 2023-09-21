@@ -32,6 +32,10 @@ Ice-breaker: Remember the names of people around you.
 
 ---
 
+## Agenda
+
+---
+
 ### 👨🏻‍💻 _DevOps, DevSecOps, GitOps_ 👩‍💻
 
 <!--
