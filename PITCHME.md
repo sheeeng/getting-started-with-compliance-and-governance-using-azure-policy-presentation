@@ -227,7 +227,7 @@ Although the act is slated to become law from January 17, 2025, the technical st
 
 ---
 
-## Controlling Controls
+### Controlling Controls (Description)
 
  [**_Description_**]((https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native)) vs. Implementation
 
@@ -237,7 +237,7 @@ Although the act is slated to become law from January 17, 2025, the technical st
 
 ---
 
-## Controlling Controls
+### Controlling Controls (Implementation)
 
 Description vs. [**_Implementation_**]((https://blog.container-solutions.com/under-control-why-governance-engineering-is-coming-to-cloud-native))
 
