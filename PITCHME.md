@@ -36,6 +36,7 @@ Ice-breaker: Remember the names of people around you.
 
 - Recapitulation of DevOps Journey
 - Compliance & Governance
+- Basics of Azure Policy
 
 ---
 
