@@ -34,6 +34,9 @@ Ice-breaker: Remember the names of people around you.
 
 ## Agenda
 
+- Recapitulation of DevOps Journey
+- Compliance & Governance
+
 ---
 
 ### 👨🏻‍💻 _DevOps, DevSecOps, GitOps_ 👩‍💻
@@ -872,6 +875,20 @@ resource "azurerm_resource_group" "deleteme987" {
 ]
 
 ```
+
+---
+
+Agility
+
+![image](./assets/miscellaneous/YinYang.svg)
+
+Governance
+
+<style scoped>img[alt="image"] {
+    width: 35%;
+    float: center;
+}
+</style>
 
 ---
 
