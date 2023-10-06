@@ -394,7 +394,7 @@ $policyDefinition = Get-AzPolicyDefinition `
 
 ---
 
-### **[Azure Policy: Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+### **[Azure Policy: Custom Definition (Tags)](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
 ```json
 {
@@ -494,6 +494,69 @@ $policyDefinition = Get-AzPolicyDefinition `
 
 ---
 
+### **[Azure Policy: Custom Definition (DenyAction)](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
+
+```json
+{
+    "properties": {
+        "displayName": "DenyActionDelete",
+        "policyType": "Custom",
+        "mode": "Indexed",
+        "description": "Deny action delete for critical resources.",
+        "metadata": {
+            "version": "1.0.0",
+            "category": "DenyAction"
+        },
+        //...
+```
+
+---
+
+```json
+        // ...
+        "parameters": {},
+        "policyRule": {
+            "if": {
+                "anyOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.DocumentDB/databaseAccounts"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Storage/storageAccounts"
+                    },
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.KeyVault/vaults"
+                    }
+                ]
+            },
+            // ...
+```
+
+---
+
+```json
+            // ...
+            "then": {
+                "effect": "DenyAction",
+                "details": {
+                    "actionNames": [
+                        "delete"
+                    ],
+                    "cascadeBehaviors": {
+                        "resourceGroup": "deny"
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+---
+
 ### **[Azure Policy: Create Custom Definition](https://learn.microsoft.com/en-us/azure/governance/policy/policy-glossary#definition)**
 
 ```powershell
@@ -530,6 +593,16 @@ Policy assignments are used by Azure Policy to define which resources are assign
 ---
 
 ![image](./assets/miscellaneous/AzurePolicyAssignments.png)
+
+<style scoped>img[alt="image"] {
+    border: 3px solid #008AD7;
+    width: 90%;
+}
+</style>
+
+---
+
+![image](./assets/miscellaneous/AzurePolicyDenyDeleteAction.png)
 
 <style scoped>img[alt="image"] {
     border: 3px solid #008AD7;
@@ -619,6 +692,22 @@ $policyAssignment = New-AzPolicyAssignment `
 
 ---
 
+Exhibit: Azure Policy Assignment
+DenyAction Delete
+
+```powershell
+$message="Deny action delete for critical resources."
+$nonComplianceMessages = @( @{Message=$message} )
+
+$policyAssignment = New-AzPolicyAssignment `
+    -Name $policyDefinition.Name `
+    -Scope "/subscriptions/$($azContext.Subscription.Id)" `
+    -PolicyDefinition $policyDefinition `
+    -NonComplianceMessage $nonComplianceMessages
+```
+
+---
+
 ![bg right:35% 55%](https://icongr.am/simple/microsoftazure.svg?size=128&color=008AD7)
 
 ## Demonstration: <br/> Create resources that violates Azure Policy on Azure Portal.
@@ -640,6 +729,18 @@ Exhibit: Missing Required Tag
 Exhibit: Missing Allowed Locations
 
 ![image](./assets/miscellaneous/CreateAResourceGroupInvalidRegion.png)
+
+<style scoped>img[alt="image"] {
+    border: 3px solid #008AD7;
+    width: 65%;
+}
+</style>
+
+---
+
+Exhibit: DenyAction Delete
+
+![image](./assets/miscellaneous/AzurePolicyFailedToDelete.png)
 
 <style scoped>img[alt="image"] {
     border: 3px solid #008AD7;
@@ -715,7 +816,7 @@ Simple syntax: When compared to the equivalent JSON template, Bicep files are mo
 
 ---
 
-Exhibit: [Azure Bicep](https://github.com/Azure/azure-quickstart-templates/blob/b41b420ccb55ff45a032b83b2f85e65d6fa16aae/quickstarts/microsoft.storage/storage-account-create/main.bicep)
+Exhibit: [Azure Bicep](https://github.com/Azure/azure-quickstart-templates/blob/b41b420ccb55ff45a032b83b2f85e65d6fa16aae/quickstarts/microsoft.storage/storage-account-create/main.bicep) Storage Account Without Tags
 
 ```bicep
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
@@ -738,7 +839,7 @@ https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/micr
 
 ---
 
-Exhibit: Terraform
+Exhibit: Terraform Storage Account Without Tags
 
 ```terraform
 resource "azurerm_storage_account" "deleteme654" {
@@ -770,7 +871,7 @@ resource "azurerm_storage_account" "deleteme654" {
                 ],
                 "reason": "Creator tag is required for resources."
             },
-            "policyAssignmentId": "/subscriptions/***/providers/Microsoft.Authorization/policyAssignments/RequireResourcesCreatorTag",
+            "policyAssignmentId": ".../policyAssignments/RequireResourcesCreatorTag",
             "policyAssignmentName": "RequireResourcesCreatorTag",
             "policyAssignmentParameters": {
                 "tagName": "Creator"
@@ -778,7 +879,7 @@ resource "azurerm_storage_account" "deleteme654" {
             "policyAssignmentScope": "/subscriptions/***",
             "policyDefinitionDisplayName": "Require a tag on resources",
             "policyDefinitionEffect": "deny",
-            "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/871b6d14-10aa-478d-b590-94f262ecfa99",
+            "policyDefinitionId": "...",
             "policyDefinitionName": "871b6d14-10aa-478d-b590-94f262ecfa99",
             "policyExemptionIds": []
         },
@@ -791,6 +892,8 @@ resource "azurerm_storage_account" "deleteme654" {
 
 Exhibit: Azure Bicep
 
+Resource Group not in Allowed Locations
+
 ```bicep
 resource newRG 'Microsoft.Resources/resourceGroups@2021-01-01' = {
   name: resourceGroupName
@@ -801,6 +904,8 @@ resource newRG 'Microsoft.Resources/resourceGroups@2021-01-01' = {
 ---
 
 Exhibit: Terraform
+
+Resource Group not in Allowed Locations
 
 ```terraform
 resource "azurerm_resource_group" "deleteme987" {
@@ -852,7 +957,7 @@ resource "azurerm_resource_group" "deleteme987" {
 
 ```json
       //...
-      "policyAssignmentId": "/subscriptions/***/providers/Microsoft.Authorization/policyAssignments/RequireResourceGroupsAllowedLocations",
+      "policyAssignmentId": ".../policyAssignments/RequireResourceGroupsAllowedLocations",
       "policyAssignmentName": "RequireResourceGroupsAllowedLocations",
       "policyAssignmentParameters": {
         "listOfAllowedLocations": [
@@ -867,7 +972,7 @@ resource "azurerm_resource_group" "deleteme987" {
       "policyAssignmentScope": "/subscriptions/***",
       "policyDefinitionDisplayName": "Allowed locations for resource groups",
       "policyDefinitionEffect": "deny",
-      "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/e765b5de-1225-4ba3-bd56-1ac6695af988",
+      "policyDefinitionId": "...",
       "policyDefinitionName": "e765b5de-1225-4ba3-bd56-1ac6695af988",
       "policyExemptionIds": []
     },
@@ -875,6 +980,50 @@ resource "azurerm_resource_group" "deleteme987" {
   }
 ]
 
+```
+
+---
+
+Exhibit: DenyAction Delete for Storage Account
+
+```json
+[
+    {
+        "info": {
+            "evaluationDetails": {
+                "evaluatedExpressions": [
+                    {
+                        "expression": "type",
+                        "expressionKind": "Field",
+                        "expressionValue": "Microsoft.Storage/storageAccounts",
+                        "operator": "Equals",
+                        "path": "type",
+                        "result": "True",
+                        "targetValue": "Microsoft.Storage/storageAccounts"
+                    }
+                ],
+                "reason": "Deny action delete for critical resources."
+            },
+            // ...
+```
+
+---
+
+```json
+            // ...
+            "policyAssignmentId": ".../policyAssignments/DenyActionDelete",
+            "policyAssignmentName": "DenyActionDelete",
+            "policyAssignmentParameters": {},
+            "policyAssignmentScope": "/subscriptions/***",
+            "policyDefinitionDisplayName": "DenyActionDelete",
+            "policyDefinitionEffect": "DenyAction",
+            "policyDefinitionId": "/...",
+            "policyDefinitionName": "DenyActionDelete",
+            "policyExemptionIds": []
+        },
+        "type": "PolicyViolation"
+    }
+]
 ```
 
 ---
