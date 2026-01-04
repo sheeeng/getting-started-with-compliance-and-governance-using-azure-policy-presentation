@@ -41,6 +41,9 @@ jobs:
           # Recommend to set lang for your deck to get better rendering for Open Graph image
           LANG: en-US
 
+          # Puppeteer args for GitHub Actions environment
+          PUPPETEER_ARGS: --no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage
+
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: public
